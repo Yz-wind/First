@@ -1,0 +1,29 @@
+#include <stdio.h>
+
+int main()
+{
+    double x1,x2,x3,y1,y2,y3;
+    while (scanf_s("%lf%lf%lf%lf%lf%lf", &x1, &x2, &x3, &y1, &y2, &y3))
+    {
+        if (x1 == 0 && x2 == 0 && x3 == 0 && y1 == 0 && y2 == 0 && y3 == 0)
+        {
+            break;
+        }
+        double sum;
+        sum = (x2 - x1) * (y3 - y1) - (y2 - y1) * (x3 - x1); //AB与AC的叉乘
+        if (sum > 0)
+        {
+            printf("0\n");//逆时针
+        }
+        else
+        {
+            printf("1\n");//顺时针
+        }
+    }
+    return 0;
+}
+//思路：利用矢量叉积判断是逆时针还是顺时针。
+//利用右手法则进行判断：
+//如果AB*AC>0,则三角形ABC是逆时针的
+//如果AB*AC<0,则三角形ABC是顺时针的
+//如果AB*AC=0，则说明三点共线。
