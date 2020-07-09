@@ -1,0 +1,25 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     struct ListNode *next;
+ * };
+ */
+struct ListNode *getIntersectionNode(struct ListNode *headA, struct ListNode *headB) 
+{
+    if(headA==NULL || headB==NULL)
+    {
+        return NULL;
+    }
+    struct ListNode *pa=headA;
+    struct ListNode *pb=headB;
+    while(pa!=pb)
+    {
+        pa=pa==NULL?headB:pa->next;//创建链表D
+        pb=pb==NULL?headA:pb->next;//创建链表C
+    }
+    return pa;
+}
+//将链表组合成长度相等的两个链表，消除长度差
+//由起点开始遍历，找到相交的节点
+//建议用图解的形似更易理解
