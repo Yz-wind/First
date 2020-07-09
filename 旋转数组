@@ -1,0 +1,24 @@
+void reverse(int* nums,int left,int right)
+{
+    int item;
+	while(left < right)
+    {
+		int item = nums[left];
+		nums[left] = nums[right];
+		nums[right] = item;
+		left++;
+		right--;
+	}
+}
+
+void rotate(int* nums, int numsSize, int k){
+	k%=numsSize;
+	reverse(nums ,0 ,numsSize - 1);    //反转所有数字
+	reverse(nums ,0 ,k - 1 );          //反转前k个数字
+	reverse(nums ,k ,numsSize - 1);    //反转后n-k个数字
+}
+//思路：利用三次旋转；
+//示例1234567，k=3，最后目标数字5671234
+//反转所有数字后：7654321
+//反转前k个数字后：5674321
+//反转后n-k个数字后：5671234，完成
