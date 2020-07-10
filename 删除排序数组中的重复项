@@ -1,0 +1,20 @@
+int removeDuplicates(int* nums, int numsSize)
+{
+    int i,j;
+    if(numsSize == 0)
+    {
+        return numsSize;
+    }
+    for(i=0,j=1;j<numsSize;j++)
+    {
+        if(nums[i]!=nums[j])
+        {
+            nums[++i]=nums[j];
+        }
+    }
+    return numsSize=i+1;
+}
+//算法思路：双指针
+//利用两个指针i，j，当两个指针对应值相等时，指针j +1，继续执行循环；
+//而当两个指针对应值不相等时，将指针i+1，并将指针j对应的值赋值给指针i，然后指针j+1，继续执行循环直至结束；
+//最后返回数组长度i+1；
