@@ -1,0 +1,46 @@
+void merge(int* nums1, int nums1Size, int m, int* nums2, int nums2Size, int n)
+{
+    int *nums3 = (int *)malloc(sizeof(int) * (m + n));
+    int i = 0,j = 0,x = 0;
+    while(i < m && j < n)
+    {
+        if(nums1[i] <= nums2[j])
+        {
+            nums3[x] = nums1[i];
+            i++;
+        }
+        else
+        {
+            nums3[x] = nums2[j];
+            j++;
+        }
+        x++;
+    }
+    if(i == m && j < n)
+    {
+        while(j < n)
+        {
+            nums3[x] = nums2[j];
+            j++;
+            x++;
+        }
+    }
+    if(j == n && i < m)
+    {
+        while(i < m)
+        {
+            nums3[x] = nums1[i];
+            i++;
+            x++;
+        }
+    }
+    for(i = 0;i < nums1Size;i++)
+    {
+        nums1[i] = nums3[i];
+    }
+}
+
+
+//设置nums3存放排序结果；
+//每一次比较将最小值存放进nums3中
+//最后再对nums1进行赋值
