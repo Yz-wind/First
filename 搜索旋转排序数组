@@ -1,0 +1,69 @@
+int search(int* nums, int numsSize, int target)
+{
+	if (numsSize == 0)
+	{
+		return -1;
+	}
+	int head = 0;
+	int tail = numsSize - 1;
+	int mid;
+	while (head < tail)
+	{
+		mid = (head + tail) / 2;
+
+		//判断头和尾是否满足要求，是的话直接返回地址
+		if (nums[head] == target)
+		{
+			return head;
+		}
+		if (nums[tail] == target)
+		{
+			return tail;
+		}
+
+		//如果head==mid，则head与tail相差1，不退出的话会陷入死循环
+		if (head == mid)
+		{
+			break;
+		}
+		//判断前半部分是否有序
+		if (nums[head] < nums[mid])
+		{
+			if (nums[head]<target && nums[mid]>target)//判断目标是否在单调区间内，是的话将尾部赋值为前段区间的尾部
+			{
+				tail = mid;
+			}
+			else                                      //如果不在单调区间内，则将头部赋值为前半区间的尾部
+			{
+				head = mid;
+			}
+		}
+		else
+		{
+			if (nums[mid]<target && nums[tail]>target)
+			{
+				head = mid;
+			}
+			else
+			{
+				tail = mid;
+			}
+		}
+	}
+
+	if (nums[head] == target) //判断head 和 tail 是否就是命中的位置
+	{
+		return head;
+	}
+	else if (nums[tail] == target)
+	{
+		return tail;
+	}
+	return -1;
+
+}
+
+//方法是采用二分搜索法
+//将区间分为两段，其中必有一段是有序的
+//判断单调的一段是否包含target，如果包含，就在单调段寻找，否则在另一段寻找
+//不断用二分法搜寻，直至head和tail相差1，退出后判断head与tail是否就是命中位置
