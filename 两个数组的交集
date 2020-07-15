@@ -1,0 +1,31 @@
+/**
+ * Note: The returned array must be malloced, assume caller calls free().
+ */
+int* intersection(int* nums1, int nums1Size, int* nums2, int nums2Size, int* returnSize){
+    if(!nums1Size || !nums1Size) {
+        *returnSize = 0;
+        return 0;
+    }
+    int min = nums1Size < nums2Size ? nums1Size : nums2Size;
+    int *num = (int*)malloc(sizeof(int) * min);
+    int sum = 0;
+    for(int i = 0; i < nums1Size; i++) {
+        for(int j = 0; j < nums2Size; j++) {
+            int flag =0;
+            if(nums1[i] == nums2[j]) {
+                for(int k = 0; k < min; k ++) {
+                    if(num[k] == nums1[i])
+                        flag = 1;
+                }
+                if(flag != 1)
+                    num[sum++] = nums1[i];
+            }
+        }
+    }
+    *returnSize = sum;
+    return num;
+}
+
+//先判断两个数组长度是否为0，若为0，则直接返回0；
+//申请一个新数组num，长度取最小数组的长度，遍历num1和num2，找到相同的值
+//再遍历num，看此数值是否已经存入，如果有则继续遍历，没有则存入其中
