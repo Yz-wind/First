@@ -1,0 +1,22 @@
+/**
+ * Note: The returned array must be malloced, assume caller calls free().
+ */
+int* findDuplicates(int* nums, int numSize, int* returnSize)
+{
+	int* p;
+	int i, temp, j = 0;
+	p = malloc(sizeof(int) * (numSize));
+	for (i = 0; i < numSize; i++)
+	{
+		temp = nums[i] > 0 ? nums[i] : -nums[i];
+		nums[temp - 1] = -nums[temp - 1];
+		if (nums[temp-1] > 0)
+		{
+			p[j++] = temp;
+		}
+	}
+	*returnSize = j;
+	return p;
+}
+//把数组中的每个元素当成索引下标，把对应位置元素取负
+//如果某对应位置元素不为负，则num[i]出现了两次
