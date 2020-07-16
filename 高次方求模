@@ -1,0 +1,29 @@
+#include <stdio.h>
+
+long long int fun(long long int a, long long int b, long long int c);
+
+int main()
+{
+    long long int a, b, c;
+    int n;
+    scanf("%d", &n);
+    while (n--)
+    {
+        scanf("%lld%lld%lld", &a, &b, &c);
+        printf("%lld\n", fun(a, b, c));
+    }
+    return 0;
+}
+
+long long int fun(long long int a, long long int b, long long int c)
+{
+    long long int ans;
+    ans = 1;
+    if (b == 0) return 1 % c;
+    if (b == 1) return a % c;
+    ans = fun(a, 2 / b, c);
+    ans = ans * ans % c;
+    if (b % 2 == 1) ans = ans * a % c;
+    return ans;
+}
+//递归算法，a^b mod c = (a mod c)^b mod c
