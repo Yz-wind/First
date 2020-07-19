@@ -1,0 +1,40 @@
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+struct point
+{
+    double x;
+    double y;
+};
+
+bool onSegment(point pi, point pj, point Q)
+{
+    if ((Q.x - pi.x) * (pj.y - pi.y) == (pj.x - pi.x) * (Q.y - pi.y)  //叉乘 
+      //保证Q点坐标在pi,pj之间 
+        && min(pi.x, pj.x) <= Q.x && Q.x <= max(pi.x, pj.x)
+        && min(pi.y, pj.y) <= Q.y && Q.y <= max(pi.y, pj.y))
+        return true;
+    else
+        return false;
+}
+
+int main()
+{
+    point p1, p2, q;
+    cin >> p1.x >> p1.y;
+    cin >> p2.x >> p2.y;
+    cin >> q.x >> q.y;
+    if (onSegment(p1, p2, q))
+    {
+        cout << "Q点在线段p1,p2上" << endl;
+    }
+    else
+    {
+        cout << "Q点不在线段p1,p2上" << endl;
+    }  
+}
+
+//给一点Q（a，b），判断Q是否在线段p1，p2上，p1（x1，y1）,p2(x2,y2)
+//若Q在p1p2上，则需满足两个条件：
+//（Q-p1） *  （p2-p1）=0 ；Q在以p1，p2为对角顶点的矩形上
