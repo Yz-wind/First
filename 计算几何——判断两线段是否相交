@@ -1,0 +1,51 @@
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+struct Line
+{
+    double x1;
+    double y1;
+    double x2;
+    double y2;
+};
+
+bool intersection(Line l1, Line l2)
+{
+    //快速排斥实验
+    if ((l1.x1 > l1.x2 ? l1.x1 : l1.x2) < (l2.x1 < l2.x2 ? l2.x1 : l2.x2) ||
+        (l1.y1 > l1.y2 ? l1.x1 : l1.x2) < (l2.y1 < l2.y2 ? l2.y1 : l2.y2) ||
+        (l2.x1 > l2.x2 ? l2.x1 : l2.x2) < (l1.x1 < l1.x2 ? l1.x1 : l1.x2) ||
+        (l2.y1 > l2.y2 ? l2.y1 : l2.y2) < (l1.y1 < l1.y2 ? l1.y1 : l1.y2))
+    {
+        return false;
+    }
+    //跨立实验
+    if ((((l1.x1 - l2.x1) * (l2.y2 - l2.y1) - (l1.y1 - l2.y1) * (l2.x2 - l2.x1)) *
+        ((l1.x2 - l2.x1) * (l2.y2 - l2.y1) - (l1.y2 - l2.y1) * (l2.x2 - l2.x1))) > 0 ||
+        (((l2.x1 - l1.x1) * (l1.y2 - l1.y1) - (l2.y1 - l1.y1) * (l1.x2 - l1.x1)) *
+            ((l2.x2 - l1.x1) * (l1.y2 - l1.y1) - (l2.y2 - l1.y1) * (l1.x2 - l1.x1))) > 0)
+    {
+        return false;
+    }
+    return true;
+}
+int main()
+{
+    Line p1, p2, q;
+    cin >> p1.x1 >> p1.y1 >> p1.x2 >> p1.y2;
+    cin >> p2.x1 >> p2.y1 >> p2.x2 >> p2.y2;
+    if (intersection(p1, p2))
+    {
+        cout << "线段p1，p2相交" << endl;
+        
+    }
+    else
+    {
+        cout << "线段p1，p2不相交" << endl;
+    }
+}
+//快速排斥实验：我们首先判断两条线段在 x 以及 y 坐标的投影是否有重合。 
+//也就是判断下一个线段中 x 较大的端点是否小于另一个线段中 x 较小的段点，若是，则说明两个线段必然没有交点，同理判断下 y。
+//跨立实验：利用叉积来判断线段是否相交，如果两线段相交那么就意味着它们互相跨立，判断A点与B点是否在线段CD两侧，即向量AD与向量BD分别在向量CD的两端
+//也就是其叉积是异号的，即（A−D)×(C−D)∗(B−D)×(C−D)<0 。 同时也要证明 C 点与 D 点在线段 AB 的两端，两个同时满足，则表示线段相交
