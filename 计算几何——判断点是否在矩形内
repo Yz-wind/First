@@ -1,0 +1,44 @@
+#include <iostream>
+using namespace std;
+
+struct Point
+{
+    double x;
+    double y;
+};
+
+bool isPointInRect(Point A, Point B, Point C, Point D, Point p)
+{
+    int a = (B.x - A.x) * (p.y - A.y) - (B.y - A.y) * (p.x - A.x);
+    int b = (C.x - B.x) * (p.y - B.y) - (C.y - B.y) * (p.x - B.x);
+    int c = (D.x - C.x) * (p.y - C.y) - (D.y - C.y) * (p.x - C.x);
+    int d = (A.x - D.x) * (p.y - D.y) - (A.y - D.y) * (p.x - D.x);
+    if ((a >= 0 && b >= 0 && c >= 0 && d >= 0) || (a <= 0 && b <= 0 && c <= 0 && d <= 0)) //在这里，线上的点也算矩形内，如果不算，去掉等号即可
+    {
+        return true;
+    }
+
+    //      AB X AP = (b.x - a.x, b.y - a.y) x (p.x - a.x, p.y - a.y) = (b.x - a.x) * (p.y - a.y) - (b.y - a.y) * (p.x - a.x);
+    //      BC X BP = (c.x - b.x, c.y - b.y) x (p.x - b.x, p.y - b.y) = (c.x - b.x) * (p.y - b.y) - (c.y - b.y) * (p.x - b.x);
+    return false;
+}
+
+int main()
+{
+    Point p1, p2, p3, p4, q;
+    cin >> p1.x >> p1.y;
+    cin >> p2.x >> p2.y;
+    cin >> p3.x >> p3.y;
+    cin >> p4.x >> p4.y;
+    cin >> q.x  >> q.y;
+    if (isPointInRect(p1, p2, p3, p4, q))
+    {
+        cout << "点q在矩形p1p2p3p4内" << endl;
+    }
+    else
+    {
+        cout << "点q不在矩形p1p2p3p4内" << endl;
+    }
+}
+
+//利用叉乘的方向性来进行判断
