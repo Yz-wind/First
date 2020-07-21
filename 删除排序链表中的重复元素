@@ -1,0 +1,49 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public :
+	ListNode* deleteDuplicates(ListNode* head) {
+		if (head == NULL || head->next == NULL)
+			return head;
+		ListNode* p = new ListNode(-1);
+		p->next = head;
+		head = p;
+		ListNode* q = p->next; //p为慢指针，q为快指针
+
+		while (q->next != NULL) {
+			if (q->val == q->next->val)
+			{
+				q = q->next;
+			}
+			else
+			{
+				if (p->next == q)//快慢指针相邻，说明没有重复区域，两指针向下一位位移
+				{
+					p = p->next;
+					q = q->next;
+				}
+				else             //快慢指针不相邻，说明有重复区域，跳过重复区域
+				{
+					q = q->next;
+					p->next = q;
+				}
+			}
+		}
+		if (p->next != q)        //判断快慢指针是否相邻
+		{
+			p->next = NULL;
+		}
+		return head->next;
+	}
+};
+//双指针一次遍历，判断快指针与其next域是否相等，相等则q=q->next,反之则分情况讨论
+//快慢指针相邻，说明没有重复区域，两指针向下一位位移
+//快慢指针不相邻，说明有重复区域，跳过重复区域
+//两种特殊情况：链表头部重复：申请一个头前节点并更新头节点
+//链表尾部重复：循环结束，判断快慢指针是否相邻，若不相邻，慢指针的下一位置空
