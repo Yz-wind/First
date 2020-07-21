@@ -1,0 +1,29 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public :
+	bool hasCycle(ListNode* head)
+	{
+		ListNode* fast{head};//快指针
+		ListNode* slow{head};//慢指针
+
+		if (head == NULL)//输入链表为空必然不是环形链表
+			return false;
+		while (fast != NULL && fast->next != NULL)
+		{
+			fast = fast->next->next;//快指针每次移动两次
+			slow = slow->next;      //慢指针每次移动一次
+			if (fast == slow)
+				return true;        //断定环形链表
+		}
+		return false;
+	}
+};
+
+//采用快慢指针来寻找相同节点，找到了则说明是环形链表
