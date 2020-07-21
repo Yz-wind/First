@@ -1,0 +1,27 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* reverseList(ListNode* head) {
+        ListNode* cur = NULL;
+        ListNode* pre = head;
+        while(pre!=NULL)
+        {
+            ListNode* t = pre->next;
+            pre->next = cur;
+            cur = pre;
+            pre = t;
+        }
+        return cur;
+    }
+};
+//双指针，定义两指针pre和cur，pre在前，cur在后
+//每次让pre的next域指向cur，实现一次局部反转
+//局部反转完成后，pre和cur同时向前移动一个位置
+//循环上述过程直至pre到达链表尾部
