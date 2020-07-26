@@ -1,0 +1,32 @@
+class Solution { //java
+	public int[] searchRange(int[] nums, int target)
+	{
+		int[] targeRange = { -1,-1 };
+
+		for (int i = 0; i < nums.length; i++)
+		{
+			if (nums[i] == target)
+			{
+				targeRange[0] = i;
+				break;
+			}
+		}
+
+		if (targeRange[0] == -1)
+		{
+			return targeRange;
+		}
+
+		for (int j = nums.length - 1; j >=0; j--)
+		{
+			if (nums[j] == target)
+			{
+				targeRange[1] = j;
+				break;
+			}
+		}
+		return targeRange;
+	}
+};
+//采用线性扫描的方法，首先对数组nums从左到右遍历，遇到target时停止，如果没有停止，则说明target不存在，返回{-1，-1}；
+//若找到了左端点坐标则进行第二次遍历，从右向左进行，找到坐标后只需返回两个坐标即可。
