@@ -1,0 +1,38 @@
+//题目：给定一个整数数组  nums，求出数组从索引 i 到 j  (i ≤ j) 范围内元素的总和，包含 i,  j 两点。
+//示例：
+//给定 nums = [-2, 0, 3, -5, 2, -1]，求和函数为 sumRange()
+//sumRange(0, 2) -> 1
+//sumRange(2, 5) -> -1
+
+
+typedef int NumArray;
+
+
+NumArray* numArrayCreate(int* nums, int numsSize) {
+    return nums;
+
+}
+
+int numArraySumRange(NumArray* obj, int i, int j) {
+    int sum = 0;
+    for(int n = i;n <= j;n++)
+    {
+        sum +=obj[n];
+    }
+    return sum;
+
+}
+
+void numArrayFree(NumArray* obj) {
+    return;
+
+}
+
+/**
+ * Your NumArray struct will be instantiated and called as such:
+ * NumArray* obj = numArrayCreate(nums, numsSize);
+ * int param_1 = numArraySumRange(obj, i, j);
+ 
+ * numArrayFree(obj);
+*/
+
