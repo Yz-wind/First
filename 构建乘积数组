@@ -1,0 +1,24 @@
+//给定一个数组 A[0,1,…,n-1]，请构建一个数组 B[0,1,…,n-1]，其中 B 中的元素 B[i]=A[0]×A[1]×…×A[i-1]×A[i+1]×…×A[n-1]。不能使用除法
+class Solution {
+public:
+    vector<int> constructArr(vector<int>& a) {
+        int n = a.size();
+        vector<int> ret(n, 1);
+        int left = 1;
+        for (int i = 0; i < n; i++) {
+            ret[i] = left;
+            left = left * a[i];
+        }
+        int right = 1;
+        for (int i = n - 1; i >= 0; i--) {
+            ret[i] *= right;
+            right *= a[i];
+        }
+        return ret;
+    }
+};
+//解题思路：B[i]就是A[i]左边所有元素的乘积 * A[i]右边所有元素的积
+//对称遍历：从左往右遍历，结果保留在数组ret中，此时ret[i]表示A[i]左边元素的乘积
+//然后从右往左累乘，获取A[i]右边元素的乘积
+//两边遍历之后得到的ret就是最终结果
+
