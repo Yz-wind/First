@@ -1,0 +1,29 @@
+//题目：给定一个数组 A，将其划分为两个不相交（没有公共元素）的连续子数组 left 和 right，使得：
+//left 中的每个元素都小于或等于 right 中的每个元素。
+/left 和 right 都是非空的。
+//left 要尽可能小。
+//在完成这样的分组后返回 left 的长度。可以保证存在这样的划分方法。
+//示例 1：
+//输入：[5,0,3,8,6]
+//输出：3
+//解释：left = [5,0,3]，right = [8,6]
+
+class Solution {
+public:
+    int partitionDisjoint(vector<int>& A) {
+        int pos = 0, mmax = A[0], acmax = A[0];
+        for(int i=1;i<A.size();i++)
+        {
+            acmax = max(acmax,A[i]);
+            if(A[i] >= mmax) continue;
+            pos = i;
+            mmax = acmax;
+        }
+        return pos + 1;
+    }
+};
+
+//方法：从左到右遍历
+//pos记录位置，mmax记录左边最大值，acmax记录遍历过的最大值
+//如果遍历的数比mmax大则继续循环，如果比mmax小，则令mmax = acmax，使左边的最大值等于遍历过的最大值
+
