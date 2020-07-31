@@ -1,0 +1,31 @@
+//给定一个整数数组 A，如果它是有效的山脉数组就返回 true，否则返回 false。
+//让我们回顾一下，如果 A 满足下述条件，那么它是一个山脉数组：
+//A.length >= 3
+//在 0 < i < A.length - 1 条件下，存在 i 使得：
+//A[0] < A[1] < ... A[i-1] < A[i]
+//A[i] > A[i+1] > ... > A[A.length - 1]
+
+
+class Solution {  //java
+    public boolean validMountainArray(int[] A)
+    {
+        int N = A.length;
+        int i = 0;
+
+        while (i + 1 < N && A[i] < A[i + 1])
+            i++;
+
+        if (i == 0 || i == N - 1)
+            return false;
+
+        while (i + 1 < N && A[i] > A[i + 1])
+            i++;
+
+        return i == N - 1;
+    }
+}
+
+//采用线性扫描的方法，从数组最左侧开始扫描，直到找到第一个不满足A[i]<A[i+1]的i，那么这个i就是数组的最高点
+//如果i=0或者i不存在，那么就返回false，否则从i开始继续扫描
+//判断接下来的位置j是否都满足A[j]>A[j+1],若都满足则返回true，否则返回false
+    
