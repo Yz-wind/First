@@ -1,0 +1,22 @@
+//题目：给定一个只包含整数的有序数组，每个元素都会出现两次，唯有一个数只会出现一次，找出这个数。
+//示例 1:
+//输入: [1,1,2,3,3,4,4,8,8]
+//输出: 2
+
+class Solution {
+public:
+	int singleNonDuplicate(vector<int>& nums) {
+		for (int i = 0; i < nums.size() - 1; i += 2)
+		{
+			if (nums[i] != nums[i + 1])
+			{
+				return nums[i];
+			}
+		}
+		return nums.back();
+	}
+};
+
+//算法：从第一个元素开始，我们检查每个第二个元素是否与当前元素相同，如果不同则说明当前元素为单一元素
+//如果我们到达最后一个元素，则它为单一元素
+
