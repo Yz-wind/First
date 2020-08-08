@@ -1,0 +1,13 @@
+//功能描述：清空通讯录中的所有信息
+//清空联系人实现步骤：封装清空联系人函数-测试清空联系人
+
+//6、清空联系人
+void cleanPerson(Addressbooks* abs)
+{
+    abs->m_size = 0;//将当前记录联系人数量置为0，做逻辑上的清空
+    cout << "通讯录已清空" << endl;
+
+    //按任意键后清屏
+    system("pause");
+    system("cls");
+}
