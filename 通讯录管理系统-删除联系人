@@ -1,0 +1,43 @@
+//功能描述：按照姓名进行删除指定联系人
+//删除联系人实现步骤：封装检测联系人是否存在-封装删除联系人函数-测试删除联系人功能
+
+//检测联系人是否存在，如果存在，返回联系人所在数组中的具体位置，不存在返回-1
+int isExist(Addressbooks* abs, string name)
+{
+    for (int i = 0; i < abs->m_size; i++)
+    {
+        //找到用户输入的姓名了
+        if (abs->personArray[i].m_Name == name)
+        {
+            return i;//找到了，返回这个人在数组中的下标编号
+        }
+    }
+    return -1;//遍历结束都没有找到，返回-1；
+}
+
+//3、删除指定联系人
+void delttePerson(Addressbooks* abs)
+{
+    cout << "请输入您要删除的联系人" << endl;
+
+    string name;
+    cin >> name;
+
+    //ret == -1 未查到
+    //ret !=-1查到了
+    int ret = isExist(abs, name);
+
+    if (ret != -1)
+    {
+        //找到此人，进行删除操作
+        for (int i = ret; i < abs->m_size; i++)
+        {
+            //数据前移
+            abs->personArray[i] = abs->personArray[i + 1];
+        }
+        abs->m_size--;
+        cout << "删除成功！" << endl;
+    }
+    system("pause");
+    system("cls");
+}
