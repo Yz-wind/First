@@ -1,0 +1,31 @@
+//功能描述：按照姓名查找指定联系人信息
+//查找联系人实现步骤：封装查找联系人函数-测试查找联系人函数
+
+//4、查找指定联系人信息
+void findPerson(Addressbooks* abs)
+{
+    cout << "请输入您要查找的联系人" << endl;
+    string name;
+    cin >> name;
+
+    //判断指定的联系人是否存在通讯录中
+    int ret = isExist(abs, name);
+
+    if (ret != -1)//找到联系人
+    {
+        cout << "姓名： " << abs->personArray[ret].m_Name << "\t";
+        cout << "性别： " << abs->personArray[ret].m_Sex << "\t";
+        cout << "年龄： " << abs->personArray[ret].m_Age << "\t";
+        cout << "电话： " << abs->personArray[ret].m_Phone << "\t";
+        cout << "住址： " << abs->personArray[ret].m_Addr << endl;;
+    }
+    else  //未找到联系人
+    {
+        cout << "查无此人" << endl;
+    }
+    
+    //任意键按下后，清屏
+    system("pause");
+    system("cls");
+    
+}
