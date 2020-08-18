@@ -1,0 +1,34 @@
+#include <iostream>
+using namespace std;
+
+//多态
+class Animal
+{
+public:
+    //虚函数
+    virtual void speak()
+    {
+        cout << "动物再说话" << endl;
+    }
+};
+
+//猫类
+class Cat :public Animal
+{
+public:
+    //重写：函数返回值类型  函数名 参数列表 要完全相同
+    void speak()
+    {
+        cout << "小猫再说话" << endl;
+    }
+};
+
+//狗类
+class Dog :public Animal
+{
+public:
+    void speak()
+    {
+        cout << "小狗在说话" << endl;
+    }
+};
