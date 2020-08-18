@@ -1,0 +1,43 @@
+//函数模板的作用：
+//建立一个通用函数，其函数返回值类型和形参类型可以不具体制定，用一个虚拟的类型来代表
+#include <iostream>
+using namespace std;
+
+//函数模板
+template<typename T>
+void mySwap(T& a, T& b)
+{
+    T temp = a;
+    a = b;
+    b = temp;
+}
+
+void test01()
+{
+    int a = 10;
+    int b = 20;
+
+    //两种方式使用函数模板
+    //1 自动类型推导
+    mySwap(a, b);
+
+    //2 显示指定类型
+    //mySwap<int>(a, b);
+
+    cout << "a = " << a << endl;
+    cout << "b = " << b << endl;
+
+}
+
+
+
+int main()
+{
+    test01();
+
+    return 0;
+}
+
+//模板就是建立通用的工具，大大提高复用性
+//模板的特点：模板不可以直接使用，它只是一个框架
+//模板的通用并不是万能的
